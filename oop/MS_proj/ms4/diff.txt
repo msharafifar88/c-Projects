@@ -1,0 +1,14 @@
+In line number 40 of your output:
+The output should be:
+            total cost: 4260.00
+                               ^
+But your output is: 
+            total cost: 4260.000000
+                               ^
+
+Unmatched character details:
+The character in column 32 is supposed to be:
+  [Newline (\n) or Carriage Retrun (\r)] ASCII code(13)
+but you printed
+  [0] ASCII code(48)
+

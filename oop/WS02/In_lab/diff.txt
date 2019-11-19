@@ -1,0 +1,14 @@
+In line number 20 of your output:
+The output should be:
+Phone Pixel2 costs $759!
+ ^
+But your output is: 
+Pixel2, costs 759
+ ^
+
+Unmatched character details:
+The character in column 2 is supposed to be:
+  [h] ASCII code(104)
+but you printed
+  [i] ASCII code(105)
+

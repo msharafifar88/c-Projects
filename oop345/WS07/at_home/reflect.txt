@@ -1,0 +1,94 @@
+
+/*
+ ============================================================================
+ Name        : Reflect
+ Author      : Mohammad Sharafifar
+ Email       : msharafifar@myseneca.ca
+ Student #   : 147473171
+ Course Code : OOP345
+ Section     : SBB
+ Date        : July, 14 , 2019
+ Workshop    : Workshop 7 - home
+ ============================================================================
+ */
+
+
+In work shop 7  we created  two vector class variables then we used functions for calculate formulas for taking the results.
+The main reason for using vectors, in my idea is that because the numbers are in order so we do not need to use others vector is efficient and fast enough also mathematical methods which are related to the formulas are more convenience.
+These are the functions that I used :
+std::accumulate();
+std::inner_product(); 
+std::transform();
+
+in the slop function I used lambda expression for power each member in the array with 2 then I used accumulate to add them on top of each other.
+
+1. The reason for using the vector container rather 
+then any other available in the STL. 
+
+Answer: We used vector container so that we can use
+.size() function to calculate different statistical 
+measurements like 'mean' or we can sum all the elements
+using .begin() and .end() function
+
+This is the code that I used lambda expression :
+std::transform(var1.begin(), var1.end(), tempvector.begin(), [](T i) {return pow(i, 2); });
+
+so I think using the STL makes it a lot easier if I did not used algorithms I should use a lots of for loops and the code could be very long but there is a negative thing about using STL libraries and it requires us to memories many template functions.
+
+2. List the STL template functions that you 
+used in your solution. 
+
+Answer:
+
+.size()
+accumulate()
+.begin()
+.end()
+.push_back()
+pow()
+
+3. Identify where you used lambda expressions. 
+
+Answer:
+we used lambda expression in sum() function
+
+T sum() const {
+			T total = { 0 };
+
+			total += std::accumulate(m_data.begin(), m_data.end(), static_cast<T>(0), [](auto& a, auto& b) { return a + b.second; });;
+
+			return total;
+		}
+
+4. Comment on the ease of programming associated with the STL. 
+
+Answer:
+
+STL allowed us to easily traverse inside a data-structure.
+For example, because of using vector which is 
+Dynamic array of variables, we could easily calculate the 
+statistical calculations that the workshop asked. If we
+used normal array instead the solution would be much 
+more difficult and cumbersome.
+
+
+============================================================================
+
+
+
+Quiz 7 reflect
+
+1 ) const char* P
+
+2 ) 16bytes
+
+3 ) &a[2]
+
+7 )  
+
+void foo(int x)
+{
+unique_prt<car> cars(new car(x));
+car ->drive();
+}
+}

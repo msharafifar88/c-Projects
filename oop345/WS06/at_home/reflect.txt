@@ -1,0 +1,70 @@
+ Name        : reflect
+ Author      : Mohammad Sharafifar
+ Email       : msharafifar@myseneca.ca
+ Student #   : 143473171
+ Course Code : OOP345
+ Section     : SBB
+ Date        : July 8, 2019 -
+ Workshop    : Workshop 6 - home
+-------------------------------------------------------------------------------------
+
+Reflection:
+
+1. The reason for using the vector container rather than any other available in the STL. 
+
+Answer:
+
+
+ Vectors are same as dynamic arrays with the ability to resize itself automatically when an element is inserted or deleted. As we are adding products in our workshop, vector inserts the product to the last of the
+list and allows us to manage inventory.
+
+2. Why there is no need to deallocate the dynamically allocated memory in your own code. 
+
+Answer: 
+
+Because we are inheriting Product and Taxable Product class from iProduct and \ iProduct is an abstract class with pure virtual functions
+
+3. How the range-based for simplifies coding in this case
+
+Answer:
+
+ As such, 'range-based for' is a feature which reduces unnecessary verbosity while simplifying the language. For example in our workshop we used it as below:
+
+for (auto& i : m_products)
+
+-------------------------------------------------------------------------------------
+
+Quiz Reflection:
+
+Q.1 
+Answer: Functional algorithms numeric
+
+Q.2
+Auto foo= Std::bind(add,10,20); foo;
+
+Q.3
+InputIterator    OutputIterator 
+
+Q.4
+transform
+
+Q.5
+std::accumulate(a.begin(),a.end(),int(0));
+
+
+Q.6
+#include <iostream>
+#include <fstream>
+
+Int main()
+ {
+
+	std::ifstream f(“file”,std::ios::binary)
+	char c[10];
+	f.read(c,10);
+	f.write(c,9);
+	return 0;
+  }
+
+
+

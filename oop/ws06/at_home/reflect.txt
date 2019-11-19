@@ -1,0 +1,80 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red255\green255\blue0;}
+{\*\expandedcolortbl;;\csgenericrgb\c100000\c100000\c0;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\ri0\partightenfactor0
+
+\f0\fs21 \cf0 // Name Mohammad Sharafiafar \'a0 \'a0 \'a0 \'a0 6/02/2019\'a0 \'a0 \'a0 \'a0 \'a0 lab section SAA\'a0 \'a0 \'a0 \'a0 Student ID : 143473171\
+\
+\
+1)\'a0\
+\
+Why does the copy assignment operator check for self-assignment before doing anything else? If it doesn\'92t do this test, what could go wrong?\'a0\
+\
+\
+Answer:\'a0\
+\
+\'a0 If we have an object say\'a0phoneNumbers[i]\'a0of type Array and if we have a line like\'a0phoneNumbers[i ]= phoneNumbers[i]\'a0somewhere, the program results in unpredictable behavior because there is no self assignment check in the above code. To avoid the above issue, self assignment check must be there while overloading assignment operator\
+\
+2)\
+What you must do in the copy constructor before calling the copy assign-ment operator? Explain why it is necessary\'a0\
+\
+\
+\
+Answer:\
+\'a0\'a0 Copy constructor is called when a new object is created from an existing object, as a copy of the existing object. And assignment operator is called when an already initialized object is assigned a new value from another existing object.\
+\
+\
+3)\
+\
+\
+Explain why the parameter of the copy constructor must be sent by-refer-ence and not by-value (modify your code to send it by-value and explain the result).\'a0\
+\
+Answer\
+\
+I think the infinite recursion would occur in the compiler and we never actually get such a program. and pass-by-value would invoke the copy constructor.\
+\
+\
+QUIZ REFLECTION\'a0\
+__________________\
+X5\
+\
+\'a0question 2 )\
+\'a0While overloading binary operators using member function, it requires ___ operand/s \'a0\
+\
+Answer is : one operator and two operands\'a0\
+\
+question 5 )\
+\
+\
+\'a0 \'a0 Test t ,h;\
+\'a0 \'a0 ++t; \'a0 \'a0\
+\'a0 \'a0 t.Display();\
+\
+the output\'a0 is Count: 6\
+\'a0\
+\
+    h=t++;\
+    h.Display();\
+\
+the output is\'a0 Count: 6\
+\
+and for t.Display();\'a0 the output is Count: 7\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\pard\pardeftab720\ri0\partightenfactor0
+
+\fs18 \cf2 \
+\pard\pardeftab720\ri0\partightenfactor0
+
+\fs24 \cf0 \
+}

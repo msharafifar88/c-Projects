@@ -1,0 +1,53 @@
+
+Reflection
+
+
+/*
+ ============================================================================
+ Name        : reflect
+ Author      : Mohammad Sharafifar
+ Email       : msharafifar@myseneca.ca
+ Student #   : 143473171
+ Course Code : OOP345
+ Section     : SBB
+ Date        : July 28, 2019 -
+ Workshop    : Workshop 9 - home
+ ============================================================================
+ */
+
+In this workshop, I have learned: 
+
+mostly I learn how to open, read-write the binary file and also how to use the binary file as well.
+Besides I also learn differently from the regular operations it is adequate to define backup and restore data it is not like the data it will copy the same format it does not care about if is string number or anything. It is a good method to construct the pointer to the function so it is a good solution when we want to send the functions with variables to another function. Multithreading lets us manage the progress of the program for example here I divide the covert function into 2 parts.
+
+some sample code related the above.
+
+ Binary file
+
+open binary file for reading
+
+        std::fstream f(file, std::ios::in | std::ios::binary);
+
+open a binary file for writing
+
+        std::fstream f(file, std::ios::out | std::ios::binary | std::ios::trunc); 
+
+Multi-threading 
+
+auto fn = std::bind(converter, text, key, nbytes, Cryptor());
+
+std::thread t1(fn);
+std::thread t2(fn);
+
+t1.join();
+t2.join();
+
+encoded = !encoded;
+
+
+Quiz reflect
+
+
+question 7:
+
+Const char *name[] = { "Homer" , "Marg" };

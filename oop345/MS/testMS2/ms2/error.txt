@@ -1,0 +1,104 @@
+CustomerOrder.cpp: In member function 'void sict::CustomerOrder::fillItem(sict::ItemSet&, std::ostream&)':
+CustomerOrder.cpp:73:23: error: 'struct sict::CustomerOrder::ItemInfo' has no member named 'it_name'; did you mean 'item_name'?
+    if (ptrItemInfo[i].it_name == item.getName()) {
+                       ^~~~~~~
+                       item_name
+CustomerOrder.cpp:74:24: error: 'struct sict::CustomerOrder::ItemInfo' has no member named 'it_filled_status'; did you mean 'item_status'?
+     if (ptrItemInfo[i].it_filled_status == false) {
+                        ^~~~~~~~~~~~~~~~
+                        item_status
+CustomerOrder.cpp:77:22: error: 'struct sict::CustomerOrder::ItemInfo' has no member named 'it_serial_number'; did you mean 'item_serial_number'?
+       ptrItemInfo[i].it_serial_number = item.getSerialNumber();
+                      ^~~~~~~~~~~~~~~~
+                      item_serial_number
+CustomerOrder.cpp:78:22: error: 'struct sict::CustomerOrder::ItemInfo' has no member named 'it_filled_status'; did you mean 'item_status'?
+       ptrItemInfo[i].it_filled_status = true;
+                      ^~~~~~~~~~~~~~~~
+                      item_status
+CustomerOrder.cpp:80:69: error: 'struct sict::CustomerOrder::ItemInfo' has no member named 'it_name'; did you mean 'item_name'?
+       os << " Filled " << getNameProduct() << "[" << ptrItemInfo[i].it_name << "][" << ptrItemInfo[i].it_serial_number << "]" << endl;
+                                                                     ^~~~~~~
+                                                                     item_name
+CustomerOrder.cpp:80:103: error: 'struct sict::CustomerOrder::ItemInfo' has no member named 'it_serial_number'; did you mean 'item_serial_number'?
+       os << " Filled " << getNameProduct() << "[" << ptrItemInfo[i].it_name << "][" << ptrItemInfo[i].it_serial_number << "]" << endl;
+                                                                                                       ^~~~~~~~~~~~~~~~
+                                                                                                       item_serial_number
+CustomerOrder.cpp:83:77: error: 'struct sict::CustomerOrder::ItemInfo' has no member named 'it_name'; did you mean 'item_name'?
+       os << " Unable to fill " << getNameProduct() << "[" << ptrItemInfo[i].it_name << "][" << ptrItemInfo[i].it_serial_number << "]" << " out of stock" << endl;
+                                                                             ^~~~~~~
+                                                                             item_name
+CustomerOrder.cpp:83:111: error: 'struct sict::CustomerOrder::ItemInfo' has no member named 'it_serial_number'; did you mean 'item_serial_number'?
+       os << " Unable to fill " << getNameProduct() << "[" << ptrItemInfo[i].it_name << "][" << ptrItemInfo[i].it_serial_number << "]" << " out of stock" << endl;
+                                                                                                               ^~~~~~~~~~~~~~~~
+                                                                                                               item_serial_number
+CustomerOrder.cpp:87:76: error: 'struct sict::CustomerOrder::ItemInfo' has no member named 'it_name'; did you mean 'item_name'?
+      os << " Unable to fill " << getNameProduct() << "[" << ptrItemInfo[i].it_name << "][" << ptrItemInfo[i].it_serial_number << "]" << " already filled" << endl;
+                                                                            ^~~~~~~
+                                                                            item_name
+CustomerOrder.cpp:87:110: error: 'struct sict::CustomerOrder::ItemInfo' has no member named 'it_serial_number'; did you mean 'item_serial_number'?
+      os << " Unable to fill " << getNameProduct() << "[" << ptrItemInfo[i].it_name << "][" << ptrItemInfo[i].it_serial_number << "]" << " already filled" << endl;
+                                                                                                              ^~~~~~~~~~~~~~~~
+                                                                                                              item_serial_number
+CustomerOrder.cpp: In member function 'bool sict::CustomerOrder::isFilled() const':
+CustomerOrder.cpp:100:23: error: 'struct sict::CustomerOrder::ItemInfo' has no member named 'it_filled_status'; did you mean 'item_status'?
+    if (ptrItemInfo[i].it_filled_status == false) {
+                       ^~~~~~~~~~~~~~~~
+                       item_status
+CustomerOrder.cpp: In member function 'bool sict::CustomerOrder::isItemFilled(const string&) const':
+CustomerOrder.cpp:118:23: error: 'struct sict::CustomerOrder::ItemInfo' has no member named 'it_name'; did you mean 'item_name'?
+    if (ptrItemInfo[i].it_name == item) {
+                       ^~~~~~~
+                       item_name
+CustomerOrder.cpp:119:24: error: 'struct sict::CustomerOrder::ItemInfo' has no member named 'it_filled_status'; did you mean 'item_status'?
+     if (ptrItemInfo[i].it_filled_status == false) {
+                        ^~~~~~~~~~~~~~~~
+                        item_status
+CustomerOrder.cpp: In member function 'std::__cxx11::string sict::CustomerOrder::getNameProduct() const':
+CustomerOrder.cpp:131:21: error: 'dm_cust_name' was not declared in this scope
+   std::string ret = dm_cust_name + " [" + dm_prod_assembled + "]";
+                     ^~~~~~~~~~~~
+CustomerOrder.cpp:131:43: error: 'dm_prod_assembled' was not declared in this scope
+   std::string ret = dm_cust_name + " [" + dm_prod_assembled + "]";
+                                           ^~~~~~~~~~~~~~~~~
+CustomerOrder.cpp: In member function 'void sict::CustomerOrder::display(std::ostream&, bool) const':
+CustomerOrder.cpp:139:36: error: 'dm_cust_name' was not declared in this scope
+   os << left << setw(width + 1) << dm_cust_name << +"[" + dm_prod_assembled + "]" << endl;
+                                    ^~~~~~~~~~~~
+CustomerOrder.cpp:139:59: error: 'dm_prod_assembled' was not declared in this scope
+   os << left << setw(width + 1) << dm_cust_name << +"[" + dm_prod_assembled + "]" << endl;
+                                                           ^~~~~~~~~~~~~~~~~
+CustomerOrder.cpp:142:52: error: 'struct sict::CustomerOrder::ItemInfo' has no member named 'it_name'; did you mean 'item_name'?
+     os << setw(width + 1) << " " << ptrItemInfo[i].it_name << endl;
+                                                    ^~~~~~~
+                                                    item_name
+CustomerOrder.cpp:147:52: error: 'struct sict::CustomerOrder::ItemInfo' has no member named 'it_serial_number'; did you mean 'item_serial_number'?
+     os << setw(width + 1) << "[" << ptrItemInfo[i].it_serial_number << "] " << ptrItemInfo[i].it_name << " - " << ptrItemInfo[i].it_filled_status << endl;
+                                                    ^~~~~~~~~~~~~~~~
+                                                    item_serial_number
+CustomerOrder.cpp:147:95: error: 'struct sict::CustomerOrder::ItemInfo' has no member named 'it_name'; did you mean 'item_name'?
+     os << setw(width + 1) << "[" << ptrItemInfo[i].it_serial_number << "] " << ptrItemInfo[i].it_name << " - " << ptrItemInfo[i].it_filled_status << endl;
+                                                                                               ^~~~~~~
+                                                                                               item_name
+CustomerOrder.cpp:147:130: error: 'struct sict::CustomerOrder::ItemInfo' has no member named 'it_filled_status'; did you mean 'item_status'?
+     os << setw(width + 1) << "[" << ptrItemInfo[i].it_serial_number << "] " << ptrItemInfo[i].it_name << " - " << ptrItemInfo[i].it_filled_status << endl;
+                                                                                                                                  ^~~~~~~~~~~~~~~~
+                                                                                                                                  item_status
+CustomerOrder.cpp: In member function 'sict::CustomerOrder& sict::CustomerOrder::operator=(sict::CustomerOrder&&)':
+CustomerOrder.cpp:163:4: error: 'dm_cust_name' was not declared in this scope
+    dm_cust_name = src.dm_cust_name;
+    ^~~~~~~~~~~~
+CustomerOrder.cpp:163:23: error: 'class sict::CustomerOrder' has no member named 'dm_cust_name'
+    dm_cust_name = src.dm_cust_name;
+                       ^~~~~~~~~~~~
+CustomerOrder.cpp:164:4: error: 'dm_prod_assembled' was not declared in this scope
+    dm_prod_assembled = src.dm_prod_assembled;
+    ^~~~~~~~~~~~~~~~~
+CustomerOrder.cpp:164:28: error: 'class sict::CustomerOrder' has no member named 'dm_prod_assembled'
+    dm_prod_assembled = src.dm_prod_assembled;
+                            ^~~~~~~~~~~~~~~~~
+CustomerOrder.cpp:170:8: error: 'class sict::CustomerOrder' has no member named 'dm_cust_name'
+    src.dm_cust_name.clear();
+        ^~~~~~~~~~~~
+CustomerOrder.cpp:171:8: error: 'class sict::CustomerOrder' has no member named 'dm_prod_assembled'
+    src.dm_prod_assembled.clear();
+        ^~~~~~~~~~~~~~~~~

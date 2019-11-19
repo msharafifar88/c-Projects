@@ -1,0 +1,14 @@
+In line number 8 of your output:
+The output should be:
+Fraction a; // a = no fraction stored
+                   ^
+But your output is: 
+Fraction a; // a = 0/0
+                   ^
+
+Unmatched character details:
+The character in column 20 is supposed to be:
+  [n] ASCII code(110)
+but you printed
+  [0] ASCII code(48)
+

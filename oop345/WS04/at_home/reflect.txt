@@ -1,0 +1,132 @@
+
+Reflection
+
+
+/*
+ ============================================================================
+ Name        : reflect
+ Author      : Mohammad Sharafifar
+ Email       : msharafifar@myseneca.ca
+ Student #   : 143473171
+ Course Code : OOP345
+ Section     : SBB
+ Date        : may 17, 2019 -
+ Workshop    : Workshop 2 - home
+ ============================================================================
+ */
+
+
+
+1. The difference between the implementations of a composition and an aggregation
+
+
+ In real-life, complex objects are often built from smaller, simpler objects. For example, a car is built using a metal frame, an engine, some tires, a transmission, a steering wheel, and a large number of other parts.
+
+in C++, you’ve already seen that structs and classes can have data members of various types (such as fundamental types or other classes). When we build classes with data members, we’re essentially constructing a complex object from simpler parts, which is object composition. For this reason, structs and classes are sometimes referred to as composite types.
+
+Object Composition is useful in a C++ context because it allows us to create complex classes by combining simpler, more easily manageable parts.
+
+>>>>  In a composition relationship, the whole object is responsible for the existence of the part. <<<<<
+but 
+
+>>>> an aggregation is still a part-whole relationship, where the parts are contained within the whole, and it is a unidirectional relationship. However, unlike a composition, parts can belong to more than one object at a time, and the whole object is not responsible for the existence and lifespan of the parts. 
+
+
+   >>>>>>>>>>>       	example of an aggregation in my code  		 <<<<<<<<<<<
+
+	class Notifications {
+
+		const Message** notification_msg_ptr = nullptr;
+
+		int notification_elements = 0;
+
+		int current_notification = 0;
+
+
+	public:
+
+		Notifications();
+
+		Notifications(int);
+
+                 size_t size() const;
+
+		Notifications(Notifications&&);
+
+		Notifications&& operator=(Notifications&&);
+
+		Notifications& operator+=(const Message& msg);
+
+		Notifications& operator-=(const Message& msg);
+
+		void display(std::ostream& os) const;
+		
+		
+	};
+
+
+
+ 
+   
+   >>>>>>>>>>>  	  example of an Composition in my code 		 <<<<<<<<<<<
+		
+	class MessagePack {
+        
+        	Message* msg_ptr = nullptr;
+        	size_t num_element;
+        
+        
+    	public:
+        	MessagePack();
+        
+        	MessagePack(Message** , int);
+        
+        	void display(std::ostream& os) const;
+        
+        	size_t size() const;
+        
+        	~MessagePack();
+        
+        	MessagePack& operator=(const MessagePack&);
+        
+       	        MessagePack& operator=(MessagePack&&);
+        
+        	MessagePack(const MessagePack&);
+        	
+        	MessagePack(MessagePack&&);
+      	
+    	};
+
+2. The difference between the implementations of move and copy functions in a composition and an aggregation.
+
+In the notification module which uses composition we wrote the move constructor as below:
+
+
+   		>>>>>>>>>>>  	  example of an move assignment operator in my code 	 <<<<<<<<<<<
+		
+	//move assignment operator
+	Notifications&& Notifications::operator=(Notifications&& Noti_Ref) {
+
+		if (this != &Noti_Ref) 
+		{
+
+			current_notification = Noti_Ref.current_notification;
+
+			notification_msg_ptr = Noti_Ref.notification_msg_ptr;
+
+			Noti_Ref.notification_msg_ptr = nullptr;
+
+			Noti_Ref.current_notification = 0;
+		}
+		return std::move(*this);
+	}
+
+		>>>>>>>>>>>  	  example of an move constructor in my code 		 <<<<<<<<<<<
+	//  move constructor
+
+	Notifications::Notifications(Notifications&& Noti_Ref) {
+
+		*this = std::move(Noti_Ref);
+
+		Noti_Ref.notification_msg_ptr = nullptr;
+	}

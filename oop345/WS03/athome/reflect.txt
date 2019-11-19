@@ -1,0 +1,98 @@
+ Name        : reflect
+ Author      : Mohammad Sharafifar
+ Email       : msharafifar@myseneca.ca
+ Student #   : 143473171
+ Course Code : OOP345
+ Section     : SBB
+ Date        : Jun 2, 2019 -
+ Workshop    : Workshop 3 - home
+ ============================================================================
+ */
+
+
+Explain in your own words what you have learned in completing this workshop.
+
+
+I have studies about different concepts in this workshop. I learn 
+about templates and their specialization.I also learned about
+function and clases templates . Moreover i also learn how can we 
+inherit one template class from other. I also learn about object creation
+of tempalted clases.
+
+ ============================================================================
+
+
+The reason for specializing the sum() member function.
+
+
+We need to  specialize the initial value for summation so that we can assign its
+value to 0 or empty string. We had to specialize this  because summation depends
+on the type of label value pair. Hence for for int it was zero and for String it 
+was initialised to an empty string. 
+
+template<> std::string SummableLVPair<std::string, std::string>::m_initialSummation = "";
+
+template<> int SummableLVPair<std::string, int>::m_initialSummation{0};
+
+============================================================================
+
+
+The reason for specializing the initial value for a summation
+
+
+We need to define the class variable outside the class definition because these
+variables needs seperate memory allocation or may be they needs to be instantiated
+
+// template declaration that initialize field width clas to 0
+  size_t SummableLVPair  <L, V>::m_minimumWidth{0};
+
+  //template Specializations 
+  template <>
+
+  // initialize the starting value to 0
+  int SummableLVPair <std::string, int>::m_InitialSummation{0};
+
+  // template specialization
+
+============================================================================
+
+
+The reason for defining the class variable outside the class definition
+
+  template<>
+  std::string SummableLVPair<std::string, std::string>::sum(const std::string& label, const std::string& sum) const 
+  {
+   
+    std::string totalSum = sum;
+
+
+    if (label == ((LVPair<std::string, std::string>&)*this).getLabel())
+    {
+
+      totalSum = sum + ' ' + ((LVPair<std::string, std::string>&)*this).getValue();
+  
+    }
+    return totalSum;
+  }
+we need to specailize the sum to ensure that strings are properly concatenated
+and because this function will get both label and value string so its necessary 
+to specialize the sum so that it concatenate both string with space .
+
+
+============================================================================
+
+ Quiz reflect
+ Q.4
+ERROR - Wrong Order
+
+we would expose the possibility of a crash at the evaluation of a[i]: 
+the order of two condition that we implement are in wrong order.
+to love this problem we can change the if condition to if ( nullptr != a && 6 == a[i] ).
+
+ Q.5
+01011001 11001101 11101011 11100010
+00000000 00000000 00001111 00000000
+
+answer is:
+
+00000000 00000000 00001011 00000000

@@ -1,0 +1,75 @@
+/*
+ ============================================================================
+ Name        : Reflect
+ Author      : Mohammad Sharafifar
+ Email       : msharafifar@myseneca.ca
+ Student #   : 147473171
+ Course Code : OOP345
+ Section     : SBB
+ Date        : may , 2019 -
+ Workshop    : Workshop 5 - Lab
+ ============================================================================
+ */
+
+
+____________________________________________________________________________________
+
+1. The difference between the implementations of a functor and a lambda expression. 
+____________________________________________________________________________________
+
+
+function object also called a functor. functor is basically any object where the "()" operator has been overloaded
+Moreover it allow us  you to store a state. it give us opportunity to use an object like function where you can 
+call the object (functor) on a variable. 
+		
+functor works as a function in C++ and achieved by overloading () operator in the class declaration. 
+When we implement a functor we get a functions with a state. 
+But traditional functions do not have a state. during 
+implementation we use the object as a function with 
+the overloaded () operator
+
+So, we do not need to use static variable in those cases. we have done it in Taxable.h as below 
+
+
+    float operator()(float price) const
+    {
+
+      return (1 + tax_rate) * price;
+
+    }
+  
+	
+Lambda expression is a locally scoped function or anonymous function. 
+we can write a functor as a lambda expression and the advantage is that we do not need a 
+class definition for lambda expression. we can store it in a variable.
+
+
+____________________________________________________________________________________
+
+2. A list of the exceptions that you have reported and the cases where you terminated execution normally. 
+____________________________________________________________________________________
+
+In C++, exceptions are used to signal errors that cannot be handled locally, such as the failure to acquire a resource in a constructor. 
+For example in our workshop we used it as below:
+
+	throw "ERROR: Number of Elements is not positive";
+And exited normally with this argument:
+		
+		
+    catch(const char* msg) {
+        
+            std::cerr << "Error: " << msg << std::endl;
+            exit(1);
+            
+        }
+    catch(int& value) {
+            std::cerr << "Error: " << value << std::endl;
+            exit(2);
+        }
+        catch(...) {
+            exit(3);
+        }
+
+____________________________________________________________________________________
+Quiz reflect => I got full mark
+

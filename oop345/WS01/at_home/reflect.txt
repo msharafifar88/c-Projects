@@ -1,0 +1,45 @@
+
+/*
+ ============================================================================
+ Name        : reflect
+ Author      : Mohammad Sharafifar
+ Email       : mSharafifar@myseneca.ca
+ Student #   : 147
+ Course Code : OOP345
+ Section     : SBB
+ Date        : may 17, 2019 -
+ Workshop    : Workshop 1 - Lab
+ ============================================================================
+ */
+
+
+1)the difference between internal and external linkage using examples from your code ?
+
+Internal linkage refers to everything only in scope of a translation unit.
+
+External linkage refers to things that exist beyond a particular translation unit
+
+
+2) the execution effect of the code in the process() function that creates the String object which is inserted into standard output (which member function(s) does this code call)
+
+first we calling the string constructor,Basically looking at the definition of process() function, it can be clearly seen that we are creating an object of string class and then equating it to the string default constructor. In the string constructor definition, we are validating the user entered string and copies it to string data member  declared for storing the string, so calling the default string constructor validates the user enter string and if its valid passes it to the output stream to print it in the process function.
+
+
+3) the changes that you made in upgrading your String class.
+
+ of string so I need to control that.
+I changed in string class in home part as compared to lab part and I up-gradation the cher of srt_name to the pointer then I can pass by address, in home I also have one more condition of validation that I Allocating dynamic memory for the string. and I deleted the dynamic memory at the end
+
+
+
+Include all corrections to the Quiz you have received (30%).At-
+
+2 - T
+4
+rvalue  10
+lvalue  20
+
+5 The keyword static declares a class variable.
+
+
+6 The members of a union may be of different types and are arranged in parallel in memory

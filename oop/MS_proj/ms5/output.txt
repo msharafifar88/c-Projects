@@ -1,0 +1,21 @@
+Script started on Sun Apr  7 23:44:29 2019
+[38;5;9mBegin Testing the Program!
+--------------------------[0m
+
+Disaster Aid Supply Management Program
+--------------------------------------
+1- List products
+2- Search product
+3- Add non-perishable product
+4- Add perishable product
+5- Add to product quantity
+6- Delete product
+7- Sort products
+0- Exit program
+> 0
+Goodbye!
+
+[38;5;9m------------------------
+End Testing the Program![0m
+
+Script done on Sun Apr  7 23:44:31 2019

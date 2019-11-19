@@ -1,0 +1,56 @@
+/*
+ ============================================================================
+ Name        : reflect
+ Author      : Mohammad Sharafifar
+ Email       : msharafifar@myseneca.ca
+ Student #   : 143473171
+ Course Code : OOP345
+ Section     : SBB
+ Date        : may 17, 2019 -
+ Workshop    : Workshop 2 - home
+ ============================================================================
+ */
+
+What I have learned:
+
+I have studies about different concepts in this workshop. Firstly i learn
+about anonymous struct that has no name and tag I learn about its declaration
+and useage. I also learned about copy constructor and copy assignment operator 
+and move constructor and move assignment operator and their implementation 
+.Moreover I learn about chrono library and obeject creation. I also learn
+about some built in function like now and how can we use them as stop watch
+to start and stop the time.
+
+Question 1: the reason for the difference between the copy and move operations
+
+There is a difference in the way, you should take the parameter.
+Copy assignment should take its parameter by a const lvalue reference (&), because you should not change the source of your assignment
+Move assignment should take its parameter by a non-const rvalue reference (&&), because you have to modify the source of your assignment
+
+Question 2: the dynamic allocation of addresses to objects instead of objects themselves 
+
+There are two ways that memory gets allocated for data storage 
+1. Compile Time (or static) Allocation
+2. Dynamic Memory Allocation
+In dynamic memory allocation we allocate memory dynamically of addresses to obeject 
+but not of obeject themselves.The main difference is the storage duration of the object.
+if we try do with obeject itself which mean it wil destroyed itself automatically
+when it goes out of scope.When you do with the addresses of obeject which means 
+it stays alive until you explicitly delete it. the object has dynamic storage 
+duration, which means it stays alive until you explicitly delete it. 
+You should only use dynamic storage duration when you need it. 
+
+
+Quiz Reflection:
+Q3:
+Wrong Answer: shape* shap = shape();
+		   shape* shap = cube();
+
+
+Right Answer: shape* shap =  new shape();
+		 Shape& shap = new cube();
+
+
+
+
+	

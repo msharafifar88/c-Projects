@@ -1,0 +1,42 @@
+// Name Mohammad Sharafiafar         6/02/2019          lab section SAA        Student ID : 143473171
+
+
+1. What is the difference between an abstract base class and a concrete class?
+
+-Answer :
+	An abstract method has no implementation.I mean the abstract class can not be instantiated because at least one method has not been implemented.
+But the concrete class is a class that has the implication of an interface.
+
+
+2. Take a look to the main module—how is it possible that this module can work with chequing and savings accounts but doesn’t know about the SavingsAccount or ChequingAccount classes?
+
+-Answer :
+	 my answer is Inheritance in C++. In an inheritance relationship, the class being inherited from is called the parent class, base class, and the class doing the inheriting is called the child class, derived class.
+
+child class inherits both behaviors (member functions) and properties (member variables) from the parent  so in our case the SavingsAccount and ChequingAccount just only defined the variable but the concept behind learn us they inherit from the main module so variables and functions become members of the class.
+
+child classes are full-fledged classes, they can have their own members that are specific to that class.
+
+
+3. Note that the interface has a destructor, even if doesn’t store any attributes. Why is that destructor necessary?
+
+-Answer:
+	The purpose of the destructor is to free the resources that the object may have acquired during its lifetime.
+
+4-In the context of a hierarchy of classes, what is the difference between overloading, overriding and shadowing?
+
+-Answer:
+	In C++ when we have a two or more functions with the same name but different argument(s) we known as overloaded functions. however Overriding and Shadowing are so close concept but main deferent between them is in override we use a virtual method in derived class and create instance of derived class and if we hold reference to derived class object as base class object, on the other hand in shadowing we using new keyword and we call the implementation, it will call base class implementation when we have reference to object of type base class.
+
+
+
+Quiz Reflection
+
+Quiz 7 Reflection
+
+
+ The member functions of a derived class can directly access only the ……………….. data.   
+
+protected and public                                                                               
+
+

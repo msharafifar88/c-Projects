@@ -1,0 +1,41 @@
+// Name Mohammad Sharafiafar         6/02/2019          lab section SAA        Student ID : 143473171
+
+
+1. What happens if you try to put your templated functions in Data.cpp? Does your source code compile if you move all functions to Data.h? Explain.
+
+-Answer :
+	If we put the the templated Function in Data.cpp the compiler in the compile time can not see the readRow() function because for the compile the code its necessary to access both the template function and also the function code.
+
+
+2. Move one template function into ws9_lab.cpp. Does it work now? Do you need to define the template function above main(), before it is used, or can you define it below main()?
+
+-Answer :
+	our telplate function such as max() or min () could not recognized by compiler 
+
+
+3. Could you have done this lab without templates, by just overloading your functions in Data.h to accept integer and double arguments? What is the advantage of using templates?
+
+-Answer:
+	we need implement the  functions. for doing that and the problem is without the template function we can not repeating the function and Polymorphism.
+
+A function template can be overloaded with other function templates and with normal (non-template) functions. A normal function is not related to a function template, it is never considered to be a specialization, even if it has the same name and type as a potentially generated function template specialization.
+
+4. What is the difference between template<class T> and template<typename T>?
+
+-Answer:
+
+ The only difference between both prototypes is the use of either the keyword class or the keyword typename. This template parameter represents a type that has not yet been specified, but that can be used in the template function as if it were a regular type.
+
+5.What have you learned doing this workshop?
+
+-Answer:
+ 
+the main thing that I learned from this workshop is how powerful and useful is template	function and how can template function make it easy to writhe wright the code,
+
+
+
+Quiz 8 Reflection
+
+question 4 )
+ In Derived 
+ In Base

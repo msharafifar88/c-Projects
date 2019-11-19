@@ -1,0 +1,535 @@
+https://github.com/krn007/OOP345/blob/master/milestone2/milestone2.cpp
+
+//**********************************************************
+CustomerItem.h
+
+#include <iostream>
+#include <string>
+
+class Item;
+
+class CustomerItem {
+	std::string name;  // name of the requested component 
+	bool filled;       // status of the request
+	unsigned int code; // unique shipping label
+public:
+	CustomerItem(const std::string& strName = std::string());
+	bool asksFor(const Item&) const;
+	bool isFilled() const;
+	void fill(const unsigned int);
+	void clear();
+	const std::string& getName() const;
+	void display(std::ostream& os) const;
+};
+//**********************************************************
+CustomerItem.cpp
+
+#include "CustomerItem.h"
+#include "Item.h"
+#include <iomanip>
+
+CustomerItem::CustomerItem(const std::string& strName) : code(0), filled(false)
+{
+	name = strName;
+}
+
+bool CustomerItem::asksFor(const Item&) const
+{
+	return false;
+}
+bool CustomerItem::isFilled() const
+{
+	return filled;
+}
+void CustomerItem::fill(const unsigned int _code)
+{
+	code = _code;
+	filled = true;
+}
+void CustomerItem::clear()
+{
+	code = 0;
+	filled = false;
+}
+const std::string& CustomerItem::getName() const
+{
+	return name;
+}
+void CustomerItem::display(std::ostream& os) const
+{
+	char cSign;
+	if (filled)	cSign = '+';
+	else cSign = '-';
+
+	if (!name.empty()) {
+		os << " " << cSign << " [" << std::right << std::setw(CODE_WIDTH)
+			<< std::setfill('0') << code << std::setfill(' ') << "] "
+			<< name << std::endl;
+	}
+}
+
+//**********************************************************
+CustomerOrder.h
+
+#include <iostream>
+#include <string>
+
+
+#ifndef _MSC_VER
+#define NOEXCEPT noexcept
+#else
+#define NOEXCEPT
+#endif
+
+class Item;
+class CustomerItem;
+
+class CustomerOrder {
+	std::string name;          // name of the customer
+	std::string product;       // name of the product
+	CustomerItem* order;       // address of the customer requests 
+	unsigned int nOrders;      // number of requests
+	static size_t field_width; // current maximum field width
+public:
+	CustomerOrder(const std::string& strRecord);
+	CustomerOrder(const CustomerOrder& cus);
+	CustomerOrder& operator=(const CustomerOrder&) = delete;                // copy operator is not permited.
+	CustomerOrder(CustomerOrder&& cus);
+	CustomerOrder&& operator=(CustomerOrder&& cus);
+	~CustomerOrder();
+	unsigned int noOrders() const;
+	const std::string& operator[](unsigned int) const;
+	void fill(Item& item);
+	void remove(Item&);
+	bool empty() const;
+	void display(std::ostream&) const;
+};
+
+//**********************************************************
+CustomerOrder.cpp
+
+#include "CustomerOrder.h"
+#include "Utilities.h"
+#include "CustomerItem.h"
+#include "Item.h"
+#include <iomanip>
+#include <vector>
+
+size_t CustomerOrder::field_width = 1;
+CustomerOrder::CustomerOrder(const std::string& strRecord) : nOrders(0), order(nullptr)
+{
+	Utilities util;
+	util.setFieldWidth(field_width);
+
+	size_t pos = 0;
+	bool more = true;
+	name = util.nextToken(strRecord, pos, more);
+	if (!name.empty()) {
+		if (more) {
+			product = util.nextToken(strRecord, pos, more);
+			// read item
+			std::vector<std::string> tmpVec;
+			while (more) {
+				std::string tmp = util.nextToken(strRecord, pos, more);
+				if (!tmp.empty()) {
+					tmpVec.push_back(std::move(tmp));
+				}
+			}
+
+			order = new CustomerItem[nOrders = tmpVec.size()];
+			std::vector<std::string>::iterator iter = tmpVec.begin();
+			int index = 0;
+			for (; iter != tmpVec.end(); iter++) {
+				order[index] = CustomerItem(*iter);
+				index++;
+			}
+		}
+		field_width = util.getFieldWidth();
+	}
+	else {
+		std::string errmsg = strRecord + "<-- *** no token found before the delimiter ***";
+		throw errmsg;
+	}
+}
+
+CustomerOrder::CustomerOrder(const CustomerOrder& cus) : nOrders(0), order(nullptr)
+{
+	std::string errmsg = "Error: copy constructor is called";
+	throw errmsg;
+}
+
+CustomerOrder::CustomerOrder(CustomerOrder&& cus) : nOrders(0), order(nullptr)
+{
+	*this = std::move(cus);
+}
+
+CustomerOrder&& CustomerOrder::operator=(CustomerOrder&& cus)
+{
+	if (this != &cus) {
+		if (order) {
+			delete[] order;
+		}
+		name = cus.name;
+		product = cus.product;
+		nOrders = cus.nOrders;
+		order = cus.order;
+
+		cus.name.clear();
+		cus.product.clear();
+		cus.nOrders = 0;
+		cus.order = nullptr;
+	}
+
+	return std::move(*this);
+}
+
+CustomerOrder::~CustomerOrder()
+{
+	if (order) {
+		delete[] order;
+		order = nullptr;
+	}
+}
+
+bool CustomerOrder::empty() const {
+	return name.empty();
+}
+
+unsigned int CustomerOrder::noOrders() const {
+	return nOrders;
+}
+
+const std::string& CustomerOrder::operator[](unsigned int i) const {
+	if (i >= nOrders) {
+		std::string errmsg = "The index is out of bounds";
+		throw errmsg;
+	}
+	return order[i].getName();
+}
+
+void CustomerOrder::fill(Item& item) {
+	for (unsigned int i = 0; i < nOrders; i++) {
+		if (!order[i].getName().compare(item.getName())) {
+			order[i].fill(item.getCode());
+			item++;
+		}
+	}
+}
+
+void CustomerOrder::remove(Item& item) {
+	for (unsigned int i = 0; i < nOrders; i++) {
+		if (!order[i].getName().compare(item.getName())) {
+			order[i].clear();
+		}
+	}
+}
+
+void CustomerOrder::display(std::ostream& os) const {
+	os << std::left << std::setw(field_width) << name << " : " << std::setw(field_width) << product << std::endl;
+	for (unsigned int i = 0; i < nOrders; i++) {
+		order[i].display(os);
+	}
+}
+
+//**********************************************************
+Item.h
+
+#include <iostream>
+#include <string>
+
+const unsigned int CODE_WIDTH = 5;
+
+class Item {
+	std::string name;          // name of the component
+	std::string filler;        // name of the filler task
+	std::string remover;       // name of the remover task 
+	std::string description;   // detailed description
+	unsigned int code;         // next shipping label
+	static size_t field_width; // current maximum field width
+public:
+	Item(const std::string& strRecord = std::string());
+	bool empty() const;
+	Item& operator++(int);
+	unsigned int getCode() const;
+	const std::string& getName() const;
+	const std::string& getFiller() const;
+	const std::string& getRemover() const;
+	void display(std::ostream&, bool full = false) const;
+};
+
+//**********************************************************
+Item.cpp
+
+#include "Item.h"
+#include "Utilities.h"
+#include <iomanip>
+
+size_t Item::field_width = 1;
+Item::Item(const std::string& strRecord) :code(1)
+{
+	description = "no detailed description";
+
+	Utilities util;
+	util.setFieldWidth(field_width);
+
+	size_t pos = 0;
+	bool more = true;
+	name = util.nextToken(strRecord, pos, more);
+	field_width = util.getFieldWidth();
+
+	if (!name.empty()) {
+		if (more) {
+			filler = util.nextToken(strRecord, pos, more);
+			if (more) {
+				remover = util.nextToken(strRecord, pos, more);
+				if (more) {
+					code = (unsigned int)atoi(util.nextToken(strRecord, pos, more).data());
+					if (more) {
+						description = util.nextToken(strRecord, pos, more);
+					}
+				}
+			}
+		}
+	}
+	else {
+		std::string errmsg = strRecord + "<-- *** no token found before the delimiter ***";
+		throw errmsg;
+	}
+
+
+}
+
+bool Item::empty() const {
+	return name.empty();
+}
+
+Item& Item::operator++(int)
+{
+	code++;
+	return *this;
+}
+
+const std::string& Item::getName() const
+{
+	return name;
+}
+const std::string& Item::getFiller() const
+{
+	return filler;
+}
+const std::string& Item::getRemover() const
+{
+	return remover;
+}
+
+unsigned int Item::getCode() const
+{
+	return code;
+}
+
+void Item::display(std::ostream& os, bool full) const
+{
+	os << std::left << std::setw(field_width) << name
+		<< " [" << std::right << std::setw(CODE_WIDTH) << std::setfill('0') << code << "]"
+		<< std::left << std::setfill(' ');
+
+	if (full) {
+		os << " From " << std::setw(field_width) << filler;
+		os << " To " << std::setw(field_width) << remover << std::endl;
+		os << std::right << std::setw(field_width + CODE_WIDTH + 4) << " : " << description;
+	}
+
+	os << std::left << std::endl;
+}
+//**********************************************************
+Utilities.h
+
+#include <string>
+#include <fstream>
+
+class Utilities {
+	size_t field_width;           // maximum field width needed 
+	static char delimiter;        // field delimiter character
+	static std::ofstream logFile; // log file
+public:
+	Utilities();
+	void setFieldWidth(size_t fw) { field_width = fw; }
+	size_t getFieldWidth() const { return field_width; }
+	const std::string nextToken(const std::string& str, size_t& next_pos, bool& more);
+	static void setDelimiter(const char c);
+	static void setLogFile(const char* filename);
+	static std::ofstream& getLogFile();
+
+	// add trim functions //
+	std::string& ltrim(std::string& s, const char* t = " \t\n\r");
+	std::string& rtrim(std::string& s, const char* t = " \t\n\r");
+};
+//**********************************************************
+Utilities.cpp
+
+#include "Utilities.h"
+
+char Utilities::delimiter = '|';
+std::ofstream Utilities::logFile;
+Utilities::Utilities()
+{
+	field_width = 1;
+}
+
+std::string& Utilities::ltrim(std::string& s, const char* t)
+{
+	s.erase(0, s.find_first_not_of(t));
+	return s;
+}
+std::string& Utilities::rtrim(std::string& s, const char* t)
+{
+	s.erase(s.find_last_not_of(t) + 1);
+	return s;
+}
+
+const std::string Utilities::nextToken(const std::string& str, size_t& next_pos, bool& more)
+{
+	// For malformed records by "/" //
+	std::string record = str;
+	size_t pos;
+	while ((pos = record.find("/")) != std::string::npos) {
+		record.replace(pos, 1, "|");
+	}
+	//==============================//
+
+
+	std::string token;
+	for (; (record.size() > next_pos) && (record[next_pos] != delimiter); next_pos++) {
+		token += record[next_pos];
+	}
+	// trim left & right //
+	token = ltrim(rtrim(token));
+
+	if (record.size() > next_pos) {
+		more = true;
+		next_pos++;
+	}
+	else {
+		more = false;
+	}
+
+	if (field_width < token.size()) {
+		field_width = token.size();
+	}
+	return token;
+}
+
+void Utilities::setDelimiter(const char c) {
+	delimiter = c;
+}
+
+void Utilities::setLogFile(const char* filename)
+{
+	logFile.open(filename, std::ofstream::out | std::ofstream::app);
+}
+std::ofstream& Utilities::getLogFile()
+{
+	return logFile;
+}
+//**********************************************************
+milestone2.cpp
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cstdlib>
+#include <vector>
+#include <memory>
+#include "CustomerOrder.h"
+#include "Utilities.h"
+#include "Item.h"
+
+template<typename T>
+void loadFromFile(const char*, std::vector<T>&, std::ostream&);
+
+int main(int argc, char** argv) {
+	// process command line arguments
+	if (argc != 4) {
+		std::cerr << "*** invalid number of arguments ***\n"
+			<< "Usage: " << argv[0] << " customer_order_file item_file delimiter\n";
+		exit(1);
+	}
+	std::cout << "Command Line Arguments\n----------------------\n";
+	std::cout << "Customer Order File Specified = " << argv[1] << "\n";
+	std::cout << "Item File Specified           = " << argv[2] << "\n";
+	std::cout << "File Record Field Delimiter   = " << argv[3][0] << "\n\n";
+	Utilities::setDelimiter(argv[3][0]);
+	// end of command line processing
+
+	// Load, Accept and Display the Customer Orders
+	//
+	std::cout << "\n*** Load and Accept the Customer Orders ***\n";
+	std::vector<CustomerOrder> customerOrders;
+	loadFromFile(argv[1], customerOrders, std::cerr);
+	std::cout << "\nList of Accepted Customer Orders\n--------------------------------\n";
+	for (auto& s : customerOrders)
+		s.display(std::cout);
+
+	// Load, Accept and Display the Items in Stock
+	//
+	std::cout << "\n*** Load and Accept the Items in Stock ***\n";
+	std::vector<Item> items;
+	loadFromFile(argv[2], items, std::cerr);
+	std::cout << "\nList of Items in Stock\n----------------------\n";
+	for (auto& i : items)
+		i.display(std::cout, true);
+
+	// Fill the Customer Orders with the Items in Stock
+	//
+	std::cout << "\n*** Process the Customer Orders ***\n";
+	for (auto& i : items)
+		for (auto& s : customerOrders)
+			s.fill(i);
+
+	// Display the Processed Customer Orders
+	//
+	std::cout << "\nList of Processed Customer Orders\n---------------------------------\n";
+	for (auto& s : customerOrders)
+		s.display(std::cout);
+
+	// Terminate
+	//
+	std::cout << "\nDone!\nPress Enter Key to Exit ... ";
+	char c;
+	std::cin.get(c);
+}
+
+template<typename T>
+void loadFromFile(const char* fileName, std::vector<T>& collection, std::ostream& os) {
+	std::ifstream file(fileName);
+	if (!file) {
+		os << "*** Cannot open file named " << fileName << " ***\n";
+		exit(1);
+	}
+	while (file) {
+		std::string record;
+		std::getline(file, record);
+		if (file) {
+			try {
+				std::unique_ptr<T> entry(new T(record));
+				if (!entry->empty())
+					collection.push_back(std::move(*entry));
+			}
+			catch (const std::string& msg) {
+				os << msg << std::endl;
+			}
+		}
+	}
+}
+//**********************************************************
+
+
+//**********************************************************
+
+
+//**********************************************************
+
+
+
+
+

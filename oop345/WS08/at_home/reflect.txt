@@ -1,0 +1,41 @@
+/*
+ ============================================================================
+ Name        : Reflect
+ Author      : Mohammad Sharafifar
+ Email       : msharafifar@myseneca.ca
+ Student #   : 147473171
+ Course Code : OOP345
+ Section     : SBB
+ Date        : July, 20 , 2019
+ Workshop    : Workshop 8 - home
+ ============================================================================
+ */
+
+In this workshop I have learned how to work with smart pointer and I could compare it with raw pointer and 
+
+- The advantage that smart pointer syntax provides.
+   The smart pointer manages the memory of the object to which it points avoiding memory leak. I mean, the smart
+   pointer allocates memory and is responsible for the deallocation too.
+
+	priceList += p;
+	delete p;
+	p = nullptr;
+
+- List the difference between raw and smart pointer syntax in your solution.
+
+    --  To use the smart pointer I included the library <memory> and I didn't have to 		deallocate the object memory.
+
+    --	When a raw pointer is no longer useful, I have to delete it, and the syntax is: 
+	delete p;
+
+    --  To define a raw pointer, the syntax is: Product* p = new Product(desc[i].desc, 		price[j].price);
+	While to define a smart pointer, the syntax is: std::unique_ptr<Product> p(new 		Product(desc[i].desc, price[j].price));
+
+============================================================================
+
+
+
+Quiz 8 reflect
+
+2) answer is : 
+		std::theard t(foo,3)
